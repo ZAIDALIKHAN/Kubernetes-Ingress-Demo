@@ -69,3 +69,49 @@ Because:
 App should NOT be exposed outside cluster directly.
 
 Ingress controller will internally reach app using "svc-app1" (ClusterIP).
+
+⭐ Production Reality: Adding a New Service (= New App)
+
+In a real company, when a new microservice is created, teams follow exactly the same steps:
+
+1️⃣ Create Deployment
+
+Every new service gets its own deployment.
+
+Example:
+payment-service-deployment.yaml
+order-service-deployment.yaml
+auth-service-deployment.yaml
+
+This defines:
+
+pods
+
+replica count
+
+container image
+
+ports
+
+resources
+
+probes
+
+✔ EXACTLY what you did for app1 & app2.
+
+2️⃣ Create Service (ClusterIP)
+
+Each app must have its own Service.
+
+Example:
+svc-payment
+svc-orders
+svc-auth
+
+Why?
+
+✔ Internal communication
+✔ Load balancing across pods
+✔ Stable virtual IP
+
+✔ Same pattern you followed — svc-app1, svc-app2.
